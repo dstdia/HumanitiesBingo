@@ -1,0 +1,69 @@
+<apex:page docType="html-5.0"
+           showChat="false"
+           showQuickActionVfHeader="false"
+           controller="BingoController"
+           sidebar="false"
+           showHeader="false"
+           apiVersion="38.0"
+           applyBodyTag="false"
+           applyHtmlTag="false"
+           >
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+       <head>
+       <script>
+           
+       </script>    
+         
+    
+    <apex:stylesheet id="slds" value="{!URLFOR($Resource.SLDS, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+         <title>
+             Histobingo
+		 </title>
+           </head>
+        <body>
+            
+        
+    <div class="histobingo slds">
+        <c:BingoNavigation />
+        <c:BingoCardHeader />
+        <div id="head">
+        <h1>
+            Bingo-Board
+        </h1>
+    </div>
+    <div id="bingo" style="width:601px">
+        <apex:repeat value="{!WordRecords}" var="bingoItem">
+            <div class='bingoitem' style="float:left; width:120px; border:1px solid #000000; height: 120px; background-color:#eeeeee">
+                {!bingoItem.Name}
+            </div>
+        </apex:repeat>
+    </div>
+    <div style="clear:left;" id="idea">
+    <apex:form >
+        <h2>
+            Ergänze Dein Lieblingswort!
+        </h2>
+        <div>
+          
+              Jeder nur ein Kreuz... Dein Wort:
+            <apex:input value="{!proposedWord}">
+        </apex:input>   
+        </div>
+       
+    	<apex:commandButton value="Save" action="{!storeProposal}" title="This one, please"/>	
+   	</apex:form>    
+    </div>
+       
+        <div id="footer">
+            Created by @stangomat <br/>
+     Randomness: {!RandomLog}
+    </div>
+        
+       </div>
+            <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+        </body>
+    </html>
+</apex:page>
