@@ -34,7 +34,9 @@ public class BingoController {
     }
     
     public void storeProposal() {
-        
+
+        if (proposedWord == NULL) return;
+
         System.debug('save + ' + proposedWord);
         Word__c word = new Word__c(
         
@@ -47,8 +49,10 @@ public class BingoController {
     }
     
     public PageReference refresh() {
-        
-        return Page.Bingo;
+
+        PageReference pr = Page.Bingo;
+        pr.setRedirect(true);
+        return pr;
     }
 
     

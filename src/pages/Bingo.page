@@ -7,63 +7,60 @@
            apiVersion="38.0"
            applyBodyTag="false"
            applyHtmlTag="false"
-           >
+>
     <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-       <head>
-       <script>
-           
-       </script>    
-         
-    
-    <apex:stylesheet id="slds" value="{!URLFOR($Resource.SLDS, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
-         <title>
-             Histobingo
-		 </title>
-           </head>
-        <body>
-            
-        
-    <div class="histobingo slds">
+    <head>
+
+
+        <apex:stylesheet id="slds" value="{!URLFOR($Resource.SLDS, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.bingoStyles + '?v2')}"/>
+        <title>
+            Histobingo
+        </title>
+    </head>
+    <body>
+
+
+    <div class="slds histobingo">
         <c:BingoNavigation />
         <c:BingoCardHeader />
-        <div id="head">
-        <h1>
-            Bingo-Board
-        </h1>
-    </div>
-    <div id="bingo" style="width:601px">
-        <apex:repeat value="{!WordRecords}" var="bingoItem">
-            <div class='bingoitem' style="float:left; width:120px; border:1px solid #000000; height: 120px; background-color:#eeeeee">
-                {!bingoItem.Name}
-            </div>
-        </apex:repeat>
-    </div>
-    <div style="clear:left;" id="idea">
-    <apex:form >
-        <h2>
-            Ergänze Dein Lieblingswort!
-        </h2>
-        <div>
-          
-              Jeder nur ein Kreuz... Dein Wort:
-            <apex:input value="{!proposedWord}">
-        </apex:input>   
+        <div class="slds" id="head">
+            <h1 class="slds-global-header__item">
+                Bingo-Board
+            </h1>
         </div>
-       
-    	<apex:commandButton value="Save" action="{!storeProposal}" title="This one, please"/>	
-   	</apex:form>    
-    </div>
-       
+        <div class="slds" id="bingo" style="width:601px; align: middle;">
+            <apex:repeat value="{!WordRecords}" var="bingoItem">
+                <div class='bingoitem' id="{!bingoItem.Id}">
+                        <div class="cardname">{!bingoItem.Name}</div>
+                </div>
+            </apex:repeat>
+        </div>
+        <div class="slds-card id=" id="idea">
+            <div class="slds slds-card__body">
+                <apex:form >
+                <div class="slds-card__title">
+                    Ergänze Dein Lieblingswort!
+                </div>
+                    <div>
+
+                       Welches Wort sollte auf jeden Fall in das Bingo aufgenommen werden?
+                        <apex:input value="{!proposedWord}">
+                        </apex:input>
+                    </div>
+
+                    <apex:commandButton styleClass="slds-button slds-button--neutral" value="Save" action="{!storeProposal}" title="This one, please"/>
+                </apex:form>
+            </div>
+        </div>
+
         <div id="footer">
-            Created by @stangomat <br/>
-     Randomness: {!RandomLog}
+            Created by @stangomat
+        </div>
+
     </div>
-        
-       </div>
-            <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-        </body>
+    <apex:includeScript value="https://code.jquery.com/jquery-3.1.1.min.js"/>
+    <apex:includeScript value="{!URLFOR($Resource.bingoController)}"/>
+    </body>
     </html>
 </apex:page>
